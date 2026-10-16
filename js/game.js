@@ -605,7 +605,7 @@ function updateCamera(dt) {
     camTarget.set(player.pos.x, 0.8, player.pos.z - 1.5);
   } else {
     orbit += dt * 0.18;
-    const wide = window.innerWidth >= 900;
+    const wide = window.innerWidth >= 900 && window.innerWidth > window.innerHeight;
     const radius = wide ? 5 : 4.2;
     camGoal.set(player.pos.x + Math.sin(orbit) * radius, 2.2, player.pos.z + Math.cos(orbit) * radius);
     // Wide screens: panel on the right, so aim right of the character.
