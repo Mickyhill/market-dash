@@ -605,10 +605,13 @@ function updateCamera(dt) {
     camTarget.set(player.pos.x, 0.8, player.pos.z - 1.5);
   } else {
     orbit += dt * 0.18;
-    camGoal.set(player.pos.x + Math.sin(orbit) * 5, 2.4, player.pos.z + Math.cos(orbit) * 5);
-    // Aim a little to the right of the character so it sits left of the panel.
-    const side = window.innerWidth >= 900 ? 1.4 : 0;
-    camTarget.set(player.pos.x + Math.cos(orbit) * side, 1.4, player.pos.z - Math.sin(orbit) * side);
+    const wide = window.innerWidth >= 900;
+    const radius = wide ? 5 : 4.2;
+    camGoal.set(player.pos.x + Math.sin(orbit) * radius, 2.2, player.pos.z + Math.cos(orbit) * radius);
+    // Wide screens: panel on the right, so aim right of the character.
+    // Phones: panel at the bottom, so aim below the character to lift it up the screen.
+    const side = wide ? 1.4 : 0;
+    camTarget.set(player.pos.x + Math.cos(orbit) * side, wide ? 1.4 : 0.35, player.pos.z - Math.sin(orbit) * side);
   }
   camera.position.lerp(camGoal, Math.min(1, dt * 3));
   camera.lookAt(camTarget);
