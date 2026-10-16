@@ -419,7 +419,9 @@ function showPlayer() {
 }
 
 async function loadPlayer() {
-  const result = await whoami();
+  // Slow connections answer late, so wait longer and try a few times before giving up.
+  let result = null;
+  for (let attempt = 0; attempt < 3 && !result; attempt += 1) result = await whoami();
   if (result || !startPlayer) startPlayer = result;
   showPlayer();
 }
