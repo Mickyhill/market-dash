@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Market Dash</title>
+  <meta name="description" content="Grab as many coins as you can before the market bell rings. Play as your own start.ng character.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23f2b82e'/%3E%3Ccircle cx='16' cy='16' r='9' fill='%23ffd96a'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+  <script type="importmap">
+    { "imports": { "three": "./lib/three.module.js" } }
+  </script>
+</head>
+<body>
+  <canvas id="scene" aria-label="Market Dash game"></canvas>
+
+  <div class="hud" id="hud" hidden>
+    <div class="hud-box"><span class="hud-label">Coins</span><b id="hud-score">0</b></div>
+    <div class="hud-box"><span class="hud-label">Time</span><b id="hud-time">60</b></div>
+  </div>
+
+  <div class="startng-card" id="player-card">
+    <img id="player-face" alt="" hidden>
+    <div class="card-text">
+      <b id="player-name">Guest</b>
+      <span id="player-account">Loading player</span>
+    </div>
+    <a class="small-button" id="player-sign-in" href="#" hidden>Sign in</a>
+  </div>
+
+  <div class="panel-wrap" id="panel-wrap">
+    <div class="panel">
+      <p class="eyebrow">start.ng game</p>
+      <h1 id="panel-title">Market Dash</h1>
+      <p class="lead" id="panel-lead">Grab coins before the market bell rings. You have 60 seconds. Gems are worth 3.</p>
+      <p class="big-score" id="panel-score" hidden></p>
+      <p class="save-message" id="panel-message" hidden></p>
+      <h2 class="board-title">Top players</h2>
+      <ol class="board" id="board"><li class="board-empty">Loading</li></ol>
+      <div class="actions">
+        <button class="button" id="play-button" type="button">Play</button>
+        <a class="button ghost" id="panel-sign-in" href="#" hidden>Sign in to save</a>
+      </div>
+      <p class="hint">Move with W A S D or the arrow keys. On a phone, drag your finger.</p>
+    </div>
+  </div>
+
+  <script type="module" src="./js/game.js"></script>
+</body>
+</html>

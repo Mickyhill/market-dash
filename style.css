@@ -1,0 +1,184 @@
+:root {
+  --ink: #292a23;
+  --cream: #fffefa;
+  --lime: #d8fd71;
+  --gold: #f2b82e;
+  --muted: rgba(255, 254, 250, 0.7);
+  font-family: ui-rounded, "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #f4d9a6;
+  color: var(--cream);
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: none;
+}
+
+#scene {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Score and timer */
+.hud {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 10px;
+  pointer-events: none;
+}
+.hud[hidden] { display: none; }
+.hud-box {
+  min-width: 92px;
+  padding: 8px 16px;
+  border-radius: 16px;
+  background: var(--ink);
+  text-align: center;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+}
+.hud-label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hud-box b { font-size: 28px; color: var(--lime); font-variant-numeric: tabular-nums; }
+.hud-box.warn b { color: #ff7a59; }
+.hud-box.pop { animation: pop 0.18s ease-out; }
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.14); }
+  100% { transform: scale(1); }
+}
+
+/* Player card: shows the start.ng face, name and account */
+.startng-card {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px 8px 8px;
+  border-radius: 999px;
+  background: var(--ink);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+  max-width: calc(100vw - 32px);
+}
+.startng-card img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--lime);
+  object-fit: cover;
+}
+.card-text { display: flex; flex-direction: column; min-width: 0; }
+.card-text b { font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-text span { font-size: 12px; opacity: 0.7; }
+.small-button {
+  margin-left: 4px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--lime);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 13px;
+  text-decoration: none;
+}
+.small-button[hidden] { display: none; }
+
+/* Start and game over panel */
+.panel-wrap {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(41, 42, 35, 0.35);
+  overflow-y: auto;
+}
+.panel-wrap[hidden] { display: none; }
+.panel {
+  width: min(440px, 100%);
+  padding: 28px 28px 22px;
+  border-radius: 28px;
+  background: var(--ink);
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+.eyebrow {
+  margin: 0 0 6px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lime);
+}
+h1 { margin: 0 0 10px; font-size: clamp(34px, 8vw, 48px); line-height: 1.05; }
+.lead { margin: 0 0 14px; line-height: 1.45; color: var(--muted); }
+.big-score { margin: 0 0 6px; font-size: 24px; font-weight: 800; color: var(--lime); }
+.save-message { margin: 0 0 12px; color: var(--cream); }
+.board-title { margin: 14px 0 8px; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.board {
+  margin: 0 0 18px;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+.board li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 12px;
+  border-radius: 12px;
+  font-size: 15px;
+}
+.board li:nth-child(odd) { background: rgba(255, 254, 250, 0.06); }
+.board li.me { background: rgba(216, 253, 113, 0.2); }
+.board .rank { width: 28px; color: var(--lime); font-weight: 800; }
+.board .who { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.board .score { font-weight: 800; font-variant-numeric: tabular-nums; }
+.board .board-empty { justify-content: center; color: var(--muted); background: none; }
+
+.actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.button {
+  padding: 13px 28px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--lime);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 800;
+  font-size: 18px;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+}
+.button:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3); }
+.button.ghost { background: transparent; color: var(--cream); border: 2px solid var(--muted); box-shadow: none; }
+.button[hidden] { display: none; }
+.hint { margin: 14px 0 0; font-size: 12px; color: var(--muted); }
+
+/* On wide screens the panel sits to the side so the player's character stays visible. */
+@media (min-width: 900px) {
+  .panel-wrap { justify-content: flex-end; padding-right: 6vw; }
+}
+
+@media (max-width: 520px) {
+  .startng-card { top: 10px; left: 10px; }
+  .hud { top: 76px; right: 10px; }
+  .hud-box { min-width: 80px; padding: 6px 12px; }
+  .hud-box b { font-size: 24px; }
+  .panel { padding: 22px 18px 18px; }
+}
