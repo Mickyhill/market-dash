@@ -1,0 +1,7 @@
+{
+  "leaderboard": {
+    "stats": [
+      { "key": "coins", "label": "Coins", "order": "highest" }
+    ]
+  }
+}

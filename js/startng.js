@@ -50,7 +50,7 @@ export function askStartNg(message, replyType, timeoutMs = 4000) {
 
 // Who is playing: { user, guest }. user is null for a guest.
 export async function whoami() {
-  const reply = await askStartNg({ type: 'startng:whoami' }, 'startng:user');
+  const reply = await askStartNg({ type: 'startng:whoami' }, 'startng:user', 8000);
   if (!reply) return null;
   return { user: reply.user ?? null, guest: reply.guest ?? null };
 }
